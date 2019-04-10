@@ -13,10 +13,10 @@ fun main(args: Array<String>) {
     //val data = genColData(Random(4385L), 16)
 
     val rand = Random(4385L)
-    val numTrials = 15
+    val numTrials = 1
     (1..numTrials).forEach { _ ->
-        val data = genColData(rand, 1024 + rand.nextInt(32), 20)
-        //val data = ColumnData(listOf(32,32,32,3,1), listOf(), listOf(), 46)
+        //val data = genColData(rand, 1024 + rand.nextInt(32), 20)
+        val data = ColumnData(listOf(4,4,3,3,3,1), listOf(), listOf(), 46)
         println("Input = ${data.input}, expected max height = ${data.height}")
         var solution: Pair<MutableList<Int>, MutableList<Int>>? = null
         val timeMs = measureTimeMillis { solution = solveTwoColumns(data.input) }
@@ -59,7 +59,8 @@ fun solveTwoColumnsRec(
     var max = Pair(0, Pair(LinkedList<Int>(), LinkedList<Int>()))
     for (index in 0 until inputs.size) {
         val it = inputs[index]
-        if (index1 == 0 && index2 == 0) println("l0: $index / ${inputs.size}")
+        //if (index1 == 0 && index2 == 0) println("l0: $index / ${inputs.size}")
+        //if (index1 == 1 || index2 == 1) println("l1: $index / ${inputs.size}")
         inputs[index] = -1
         if (it != -1 && index >= index1) {
             col1.add(it)
