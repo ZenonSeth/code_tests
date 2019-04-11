@@ -7,24 +7,24 @@ fun main() {
     val s1 = "friend"
     var s2 = "enemy"
     println(findLongestCommonSubsequence(s1,s2))
-    println(findCostToConvertStringAtoStringB(s1, s2))
+    println(dist_findCostToConvertStringAtoStringB(s1, s2))
     s2 = "g$s2"
     println("-")
     println(findLongestCommonSubsequence(s1,s2))
-    println(findCostToConvertStringAtoStringB(s1, s2))
+    println(dist_findCostToConvertStringAtoStringB(s1, s2))
 }
 
 
-fun findCostToConvertStringAtoStringB(a: String, b: String) =
+fun dist_findCostToConvertStringAtoStringB(a: String, b: String) =
         (Math.max(a.length, b.length) - findLongestCommonSubsequence(a, b).length)
 
 
 fun findLongestCommonSubsequence(str1: String, str2: String) =
-        if (str1.length > str2.length) findLongestCommonSubsequenceStartingAt(str2, str1)
-        else findLongestCommonSubsequenceStartingAt(str1, str2)
+        if (str1.length > str2.length) dist_findLongestCommonSubsequenceStartingAt(str2, str1)
+        else dist_findLongestCommonSubsequenceStartingAt(str1, str2)
 
 
-fun findLongestCommonSubsequenceStartingAt(shorter: String, longer: String, startingIndex: Int = 0): String {
+fun dist_findLongestCommonSubsequenceStartingAt(shorter: String, longer: String, startingIndex: Int = 0): String {
     var latestIndexInLong = -1
     var longestStr = ""
     val alternatives = mutableListOf<String>()
@@ -35,7 +35,7 @@ fun findLongestCommonSubsequenceStartingAt(shorter: String, longer: String, star
             longestStr += shorter[i]
         }
         if (indexInLonger >= 0)
-            alternatives.add(findLongestCommonSubsequenceStartingAt(shorter, longer, i + 1))
+            alternatives.add(dist_findLongestCommonSubsequenceStartingAt(shorter, longer, i + 1))
     }
     alternatives.forEach {
         if (it.length > longestStr.length) longestStr = it
