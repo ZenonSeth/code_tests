@@ -9,6 +9,10 @@ import java.util.*
 private var globalLocale = Locale.UK
 
 fun main() {
+    runConvertUnixTimestampProg()
+}
+
+fun runConvertUnixTimestampProg() {
     val scanner = Scanner(System.`in`)
     while (true) {
         println("Current globalLocale is ${globalLocale.displayName}")
