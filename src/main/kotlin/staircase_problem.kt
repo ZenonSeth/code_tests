@@ -17,10 +17,11 @@ For example, if X = {1, 3, 5}, you could climb 1, 3, or 5 steps at a time.
 
 
 fun main() {
-    val numStairs = 11
-    val allowedSteps = setOf(2,3)
-    println(findStaircaseSolutions(numStairs, allowedSteps,true))
-    println(findStaircaseSolutionsLoop(numStairs, allowedSteps))
+    val numStairs = 3
+    val allowedSteps = setOf(1,2)
+    println(findStaircaseSolutions(numStairs, allowedSteps,false).size)
+//    println(findStaircaseSolutionsLoop(numStairs, allowedSteps).size)
+    println(staircaseProblemSolveRob(numStairs))
 }
 
 // first solution - using recursion
@@ -49,6 +50,15 @@ fun findStaircaseSolutions(
         }
     }
     return solutions
+}
+
+fun staircaseProblemSolveRob(n: Int): Int {
+    require(n > 0) { "Int |n| must be non-zero non-negative. n=$n" }
+    return when (n) {
+        1 -> 1
+        2 -> 1 + staircaseProblemSolveRob(1)
+        else -> staircaseProblemSolveRob(n - 1) + staircaseProblemSolveRob(n - 2)
+    }
 }
 
 
