@@ -8,14 +8,43 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
+def arrow_version = "0.9.0"
+
 repositories {
     mavenCentral()
+    jcenter()
+    maven { url "https://dl.bintray.com/arrow-kt/arrow-kt/" }
+    maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local/' }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1'
     implementation "io.reactivex.rxjava2:rxjava:2.2.8"
+
+    compile "io.arrow-kt:arrow-core-data:$arrow_version"
+    compile "io.arrow-kt:arrow-core-extensions:$arrow_version"
+    compile "io.arrow-kt:arrow-syntax:$arrow_version"
+    compile "io.arrow-kt:arrow-typeclasses:$arrow_version"
+    compile "io.arrow-kt:arrow-extras-data:$arrow_version"
+    compile "io.arrow-kt:arrow-extras-extensions:$arrow_version"
+
+    compile "io.arrow-kt:arrow-query-language:$arrow_version" //optional
+    compile "io.arrow-kt:arrow-free-data:$arrow_version" //optional
+    compile "io.arrow-kt:arrow-free-extensions:$arrow_version" //optional
+    compile "io.arrow-kt:arrow-effects-data:$arrow_version" //optional
+    compile "io.arrow-kt:arrow-effects-extensions:$arrow_version" //optional
+    compile "io.arrow-kt:arrow-effects-io-extensions:$arrow_version" //optional
+    compile "io.arrow-kt:arrow-effects-rx2-data:$arrow_version" //optional
+    compile "io.arrow-kt:arrow-effects-rx2-extensions:$arrow_version" //optional
+    // these force JVM target of 1.6 for some reason...
+//    compile "io.arrow-kt:arrow-effects-kotlinx-coroutines-data:$arrow_version" //optional
+//    compile "io.arrow-kt:arrow-effects-kotlinx-coroutines-extensions:$arrow_version" //optional
+    compile "io.arrow-kt:arrow-optics:$arrow_version" //optional
+    compile "io.arrow-kt:arrow-generic:$arrow_version" //optional
+    compile "io.arrow-kt:arrow-recursion-data:$arrow_version" //optional
+    compile "io.arrow-kt:arrow-recursion-extensions:$arrow_version" //optional
+
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
