@@ -1,6 +1,6 @@
 //
 //
-//fun main () {
+//fun kotlin_oddities.main () {
 //    val myfact = myfact()
 //    myfact.t = 4
 //    println("--${myfact.t}")

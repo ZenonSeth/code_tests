@@ -2,7 +2,7 @@
 //import io.reactivex.Single
 //import java.util.*
 //
-//fun main() {
+//fun kotlin_oddities.main() {
 //
 //}
 //
