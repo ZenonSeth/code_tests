@@ -220,7 +220,6 @@ package puzzlers
  * b) won't compile
  * c) NullPointerException
  * d) none of the above
- * d) none of the above
  */
 
 
@@ -664,3 +663,47 @@ package puzzlers
  */
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****************************************************************
+ *  14 - thx to JiriB
+ ****************************************************************/
+
+//fun compareTwo(a: Boolean, b: Boolean) {
+//    if (a == b) println("same")
+//    else println("different")
+//}
+//
+//val x = 3
+//val A = 1
+//val B = 4
+//
+//compareTwo( A < x, B > x)
+
+/**
+ * What will it print?
+ * a) same
+ * b) different
+ * c) will not compile
+ * d) something else
+ */
