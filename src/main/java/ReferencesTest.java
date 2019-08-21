@@ -45,6 +45,10 @@ public class ReferencesTest {
             //System.gc();
             allocateInts();
 
+            System.out.println(phantomRef);
+            System.out.println(softR);
+            System.out.println(weakR);
+            System.out.println("\n");
 //            phantomRef.getSecond().join();
 //            softR.getSecond().join();
 //            weakR.getSecond().join();
@@ -54,28 +58,28 @@ public class ReferencesTest {
     }
 
     private static void allocateInts() {
-        for (int i = 0; i < Integer.MAX_VALUE; i++) {
+        for (int i = 0; i < 4_000_000; i++) {
             if (new Integer(i).toString().equals("234")) System.out.println("\n>\n");
         }
     }
 
     static Pair<PhantomReference<Wrapper>, Thread> phantomRef() {
-        ReferenceQueue<Object> refQueue = new ReferenceQueue<>();
+        final ReferenceQueue<Object> refQueue = new ReferenceQueue<>();
         Wrapper intObj = new Wrapper("phantom");
         PhantomReference<Wrapper> ref = new PhantomReference<>(intObj, refQueue);
 
         Thread thread = new Thread(() -> {
-            printWhenObjIsFree(refQueue, "phantom reference", false);
+            printWhenObjIsFree(refQueue, "phantom reference", true);
         });
         thread.start();
 
         System.out.println("ptantom intObj = " + intObj);
 
-        return new Pair<>(ref, thread);
+        return new Pair<>(null, thread);
     }
 
     static Pair<SoftReference<Wrapper>, Thread> softRef() {
-        ReferenceQueue<Object> refQueue = new ReferenceQueue<>();
+        final ReferenceQueue<Object> refQueue = new ReferenceQueue<>();
         Wrapper intObj = new Wrapper("soft");
         SoftReference<Wrapper> ref = new SoftReference<>(intObj, refQueue);
 
@@ -90,7 +94,7 @@ public class ReferencesTest {
     }
 
     static Pair<WeakReference<Wrapper>, Thread> weakRef() {
-        ReferenceQueue<Object> refQueue = new ReferenceQueue<>();
+        final ReferenceQueue<Object> refQueue = new ReferenceQueue<>();
         Wrapper intObj = new Wrapper("weak");
         WeakReference<Wrapper> ref = new WeakReference<>(intObj, refQueue);
 
@@ -104,12 +108,23 @@ public class ReferencesTest {
         return new Pair<>(ref, thread);
     }
 
-    static void printWhenObjIsFree(ReferenceQueue<?> queue, String name, boolean wait) {
+    static void printWhenObjIsFree(ReferenceQueue<?> queue, String name, boolean poll) {
         System.out.println("enter checking for " + name);
 
         try {
+            if (poll) {
+                while (true) {
+                    Reference<?> aref = queue.poll();
+                    if (aref != null) {
+                        System.out.println("queue poll was non-null, name +  aref =  " +
+                                "" + aref);
+                        break;
+                    }
+                    Thread.sleep(250);
+                }
+            } else {
                 queue.remove();
-
+            }
         } catch (InterruptedException e) { e.printStackTrace(); }
 
         System.out.println("Object freed from " + name + " queue");
