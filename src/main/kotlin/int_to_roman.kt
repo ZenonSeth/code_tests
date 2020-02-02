@@ -12,7 +12,7 @@ fun int_to_roman(number: Int): String {
     fun romanize(number: Int, sigDig: Int, maxSym: String, halfSym: String, singleSym: String): String {
         val digit = number / sigDig - number / (sigDig * 10) * 10
         return when {
-            digit >= 9 -> singleSym + maxSym
+            digit == 9 -> singleSym + maxSym
             digit >= 5 -> halfSym + singleSym.repeat(digit - 5)
             digit == 4 -> singleSym + halfSym
             else -> singleSym.repeat(digit)
