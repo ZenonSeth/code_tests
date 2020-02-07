@@ -57,6 +57,7 @@ public class ReferencesTest {
         } catch (InterruptedException e) { e.printStackTrace(); }
     }
 
+
     private static void allocateInts() {
         for (int i = 0; i < 4_000_000; i++) {
             if (new Integer(i).toString().equals("234")) System.out.println("\n>\n");

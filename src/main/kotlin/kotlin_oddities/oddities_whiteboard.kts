@@ -2,6 +2,29 @@ package kotlin_oddities
 
 
 
+abstract class ATT (func: ATT.() -> Unit) {
+
+    private fun <T : ATT> exec(func: T.()->Unit): ATT.()->Unit {
+        return { (this as T).func() }
+    }
+}
+
+class BTT(func: BTT.() -> Unit) {
+    init { func() }
+}
+
+val doubleFunc = fun Double.() {
+
+}
+
+fun numFunc(numFunc: Number.() -> Unit) {
+
+}
+
+//numFunc(doubleFunc)
+
+
+
 abstract class BaseClass {
     val otherInfo = "something"
     init {
