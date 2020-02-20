@@ -225,25 +225,38 @@ class Accumulator<T>(private val values: List<T> = emptyList()) {
 
 
 
+//
+//var completable = CompletableSubject.create()
+//
+//completable.subscribe( {println("one complete")}, {throwable ->  })
+//
+//completable.onComplete()
+//
+//completable.subscribe( {println("two complete")}, {throwable ->  })
+//
+//
+//completable = CompletableSubject.create()
+//
+//completable.subscribe( {println("onex complete")}, {throwable ->  println("onex throw")})
+//
+//completable.onError(NullPointerException())
+//
+//completable.subscribe( {println("twox complete")}, {throwable ->  println("twox throw") })
+//
+//
+//
+//val ssa  = SingleSubject.create<String>()
+//ssa.doAfterTerminate {  }
 
-var completable = CompletableSubject.create()
-
-completable.subscribe( {println("one complete")}, {throwable ->  })
-
-completable.onComplete()
-
-completable.subscribe( {println("two complete")}, {throwable ->  })
 
 
-completable = CompletableSubject.create()
+var FLAG_A = false
+inner class Thinggetter {
+    val isFlagA: Boolean
+        get() = FLAG_A
+}
 
-completable.subscribe( {println("onex complete")}, {throwable ->  println("onex throw")})
-
-completable.onError(NullPointerException())
-
-completable.subscribe( {println("twox complete")}, {throwable ->  println("twox throw") })
-
-
-
-val ssa  = SingleSubject.create<String>()
-ssa.doAfterTerminate {  }
+val th = Thinggetter()
+println(th.isFlagA)
+FLAG_A = true
+println(th.isFlagA)
