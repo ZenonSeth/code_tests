@@ -78,3 +78,17 @@ class Prod<A, B>(val a: A, val b: B)
 val a_member_of_cartesian_prod_of_bool_and_triple = Prod(false, Triple.B)
 
 println("${a_member_of_cartesian_prod_of_bool_and_triple.a} ${a_member_of_cartesian_prod_of_bool_and_triple.b}")
+
+
+/*
+    (A,B,C) ^ (X,Y) -> ( (A,A), (A,B), (A,C), ... (C,C) )
+    lets call ^ 'translate'
+ */
+
+
+data class NTuple<A>(val values: List<A>, val N: Int = values.size)
+
+fun <A, B> translate(power: Set<B>, func: (B) -> A): NTuple<A> =
+    NTuple<A>(power.fold(listOf<A>()) { acc, it -> acc.plus(func(it)) })
+
+println(translate(setOf<Nothing>(), { _: Nothing -> false}))
